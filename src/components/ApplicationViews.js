@@ -28,8 +28,20 @@ export default class ApplicationViews extends Component {
       .then(() => this.setState(newState));
   }
 
+  deleteCandy = id => {
+    return fetch(`http://localhost:5002/candies/${id}`, {
+      method: "DELETE"
+    })
+      .then(e => e.json())
+      .then(() => fetch(`http://localhost:5002/candies`))
+      .then(e => e.json())
+      .then(candies =>
+        this.setState({
+          candies: candies
+        })
+      );
+  };
   render() {
-    console.log(this.state.candies);
     return (
       <React.Fragment>
         <Route
@@ -46,6 +58,7 @@ export default class ApplicationViews extends Component {
               <CandyList
                 candies={this.state.candies}
                 candyTypes={this.state.candyTypes}
+                deleteCandy={this.deleteCandy}
               />
             );
           }}

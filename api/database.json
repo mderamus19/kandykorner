@@ -1,24 +1,56 @@
 {
   "stores": [
-    { "id": 1, "name": "Sugarville, AL" },
-    { "id": 2, "name": "Sweet Hills, VA" },
-    { "id": 3, "name": "Godiva, PA" }
+    {
+      "id": 1,
+      "name": "Sugarville, AL"
+    },
+    {
+      "id": 2,
+      "name": "Sweet Hills, VA"
+    },
+    {
+      "id": 3,
+      "name": "Godiva, PA"
+    }
   ],
-
   "employees": [
-    { "id": 1, "name": "Sugar Daddy" },
-    { "id": 2, "name": "Kit Kat" },
-    { "id": 3, "name": "Baby Ruth" }
+    {
+      "id": 1,
+      "name": "Sugar Daddy"
+    },
+    {
+      "id": 2,
+      "name": "Kit Kat"
+    },
+    {
+      "id": 3,
+      "name": "Baby Ruth"
+    }
   ],
   "candyTypes": [
-    { "id": 1, "name": "Gummy" },
-    { "id": 2, "name": "Chocolate Bar" },
-    { "id": 3, "name": "Chewy" }
+    {
+      "id": 1,
+      "name": "Gummy"
+    },
+    {
+      "id": 2,
+      "name": "Chocolate Bar"
+    },
+    {
+      "id": 3,
+      "name": "Chewy"
+    }
   ],
-
   "candies": [
-    { "id": 1, "name": "Twin Cherries", "candyTypeId": 1 },
-    { "id": 2, "name": "Snicker", "candyTypeId": 2 },
-    { "id": 3, "name": "Starburst", "candyTypeId": 3 }
+    {
+      "id": 1,
+      "name": "Twin Cherries",
+      "candyTypeId": 1
+    },
+    {
+      "id": 3,
+      "name": "Starburst",
+      "candyTypeId": 3
+    }
   ]
 }
