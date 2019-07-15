@@ -56,9 +56,9 @@ export default class ApplicationViews extends Component {
           render={props => {
             return (
               <CandyList
-              candies={this.state.candies}
-              candyTypes={this.state.candyTypes}
-              deleteCandy={this.deleteCandy}
+                candies={this.state.candies}
+                candyTypes={this.state.candyTypes}
+                deleteCandy={this.deleteCandy}
               />
             );
           }}

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import CandyTypeList from "./candyType/CandyTypeList";
 
 export default class CandyList extends Component {
   render() {
