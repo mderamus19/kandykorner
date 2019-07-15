@@ -6,38 +6,42 @@ import EmployeeList from "./employee/EmployeeList";
 import CandyTypeList from "./candyType/CandyTypeList";
 
 export default class ApplicationViews extends Component {
-  storesFromAPI = [
-    { id: 1, name: "Sugarville, AL" },
-    { id: 2, name: "Sweet Hills, VA" },
-    { id: 3, name: "Godiva, PA" }
-  ];
-
-  employeesFromAPI = [
-    { id: 1, name: "Sugar Daddy" },
-    { id: 2, name: "Kit Kat" },
-    { id: 3, name: "Baby Ruth" }
-  ];
-  candyTypesFromAPI = [
-    { id: 1, name: "Gummy" },
-    { id: 2, name: "Chocolate Bar" },
-    { id: 3, name: "Chewy" }
-  ];
-
-  candiesFromAPI = [
-    { id: 1, name: "Twin Cherries", candyTypeId: 1 },
-    { id: 2, name: "Snicker", candyTypeId: 2 },
-    { id: 3, name: "Starburst", candyTypeId: 3 }
-  ];
-
   state = {
-    stores: this.storesFromAPI,
-    employees: this.employeesFromAPI,
-    candies: this.candiesFromAPI,
-    candyTypes: this.candyTypesFromAPI
+    stores: [],
+    employees: [],
+    candies: [],
+    candyTypes: []
   };
 
+  componentDidMount() {
+    const newState = {};
+
+    fetch("http://localhost:5002/stores")
+      .then(r => r.json())
+      .then(stores => (newState.stores = stores))
+      .then(() => fetch("http://localhost:5002/employees").then(r => r.json()))
+      .then(employees => (newState.employees = employees))
+      .then(() => fetch("http://localhost:5002/candies").then(r => r.json()))
+      .then(candies => (newState.candies = candies))
+      .then(() => fetch("http://localhost:5002/candyTypes").then(r => r.json()))
+      .then(candyTypes => (newState.candyTypes = candyTypes))
+      .then(() => this.setState(newState));
+  }
+
+  deleteCandy = id => {
+    return fetch(`http://localhost:5002/candies/${id}`, {
+      method: "DELETE"
+    })
+      .then(e => e.json())
+      .then(() => fetch(`http://localhost:5002/candies`))
+      .then(e => e.json())
+      .then(candies =>
+        this.setState({
+          candies: candies
+        })
+      );
+  };
   render() {
-    console.log(this.state.candyTypes)
     return (
       <React.Fragment>
         <Route
@@ -50,10 +54,13 @@ export default class ApplicationViews extends Component {
         <Route
           path="/candies"
           render={props => {
-            return <CandyList
-            candies={this.state.candies}
-            candyTypes={this.state.candyTypes}
-             />;
+            return (
+              <CandyList
+              candies={this.state.candies}
+              candyTypes={this.state.candyTypes}
+              deleteCandy={this.deleteCandy}
+              />
+            );
           }}
         />
         <Route
@@ -66,7 +73,7 @@ export default class ApplicationViews extends Component {
         <Route
           path="/candyTypes"
           render={props => {
-          return <CandyTypeList candyTypes={this.state.candyTypes} />;
+            return <CandyTypeList candyTypes={this.state.candyTypes} />;
           }}
         />
       </React.Fragment>
