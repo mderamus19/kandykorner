@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import StoreList from "./store/StoreList";
 import CandyList from "./candy/CandyList";
 import EmployeeList from "./employee/EmployeeList";
+import CandyTypeList from "./candyType/CandyTypeList";
 
 export default class ApplicationViews extends Component {
   storesFromAPI = [
@@ -23,17 +24,20 @@ export default class ApplicationViews extends Component {
   ];
 
   candiesFromAPI = [
-    { id: 1, name: "Twin Cherries" },
-    { id: 2, name: "Snicker" },
-    { id: 3, name: "Starburst" }
+    { id: 1, name: "Twin Cherries", candyTypeId: 1 },
+    { id: 2, name: "Snicker", candyTypeId: 2 },
+    { id: 3, name: "Starburst", candyTypeId: 3 }
   ];
 
   state = {
     stores: this.storesFromAPI,
     employees: this.employeesFromAPI,
-    candies: this.candiesFromAPI
+    candies: this.candiesFromAPI,
+    candyTypes: this.candyTypesFromAPI
   };
+
   render() {
+    console.log(this.state.candyTypes)
     return (
       <React.Fragment>
         <Route
@@ -46,13 +50,23 @@ export default class ApplicationViews extends Component {
         <Route
           path="/candies"
           render={props => {
-            return <CandyList candies={this.state.candies} />;
+            return <CandyList
+            candies={this.state.candies}
+            candyTypes={this.state.candyTypes}
+             />;
           }}
         />
         <Route
           path="/employees"
           render={props => {
             return <EmployeeList employees={this.state.employees} />;
+          }}
+        />
+
+        <Route
+          path="/candyTypes"
+          render={props => {
+          return <CandyTypeList candyTypes={this.state.candyTypes} />;
           }}
         />
       </React.Fragment>
